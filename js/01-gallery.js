@@ -32,13 +32,13 @@ gallery.addEventListener("click", (event) => {
     `<img width="1280" src="${eventTarget}"/img>`
   );
   lightboxInstance.show();
+  document.addEventListener("keydown", onEscape);
 
   function onEscape(event) {
-    if (event.code === "Escape") {
-      lightboxInstance.close();
-    }
-  }
-  document.addEventListener("keydown", onEscape);
-});
+    if (event.code !== "Escape") return;
+    lightboxInstance.close();
 
+    document.removeEventListener("keydown", onEscape);
+  }
+});
 gallery.insertAdjacentHTML("beforeend", galleryMarkup);
